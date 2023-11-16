@@ -1,10 +1,22 @@
+'use client'
 import logo from '../../public/logo.svg'
-
 import Image from 'next/image'
 import Link from 'next/link'
 import CartButton from './CartButton'
+import React, { useState } from 'react'
+import CartModal from '../components/CartModal'
 
 export default function Header() {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true)
+  }
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
+  }
+
   return (
     <header
       className={
@@ -29,7 +41,8 @@ export default function Header() {
           </span>
         </div>
       </Link>
-      <CartButton />
+      <CartButton onClick={handleOpenModal} />
+      {isModalOpen && <CartModal onClose={handleCloseModal} />}
     </header>
   )
 }
