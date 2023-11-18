@@ -42,7 +42,9 @@ export default function Header() {
         </div>
       </Link>
       <CartButton onClick={handleOpenModal} />
-      {isModalOpen && <CartModal onClose={handleCloseModal} />}
+      {isModalOpen && (
+        <CartModal onClose={handleCloseModal} isLoggedIn={true} />
+      )}
     </header>
   )
 }
