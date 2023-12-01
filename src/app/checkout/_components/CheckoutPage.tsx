@@ -1,9 +1,24 @@
+'use client'
+
 import React from 'react'
 import AddToCartButton from '@/components/ui/Button'
+import CheckOutElement from './CheckOutElement'
+import CountrySelector from './CountrySelector'
 
 export default function CheckoutPage() {
+  const items = [
+    { id: 1, name: 'Coffee A', weight: '250g', price: 12.99 },
+    { id: 2, name: 'Coffee B', weight: '500g', price: 19.99 },
+    { id: 3, name: 'Coffee C', weight: '1kg', price: 29.99 },
+  ]
+  const subtotal = items.reduce((acc, item) => acc + item.price, 0)
+
+  const handleCountryChange = (selectedCountry) => {
+    console.log('Selected Country:', selectedCountry)
+  }
+
   return (
-    <div className="mx-24 mt-8 flex items-center justify-center">
+    <div className="mx-24 mt-8 flex justify-center">
       <div className="w-1/2 p-4">
         {/* Checkout form */}
         <form>
@@ -15,7 +30,12 @@ export default function CheckoutPage() {
               <label className=" text-sm font-medium text-gray-600">
                 Email
               </label>
-              <p>Have an account? Log in</p>
+              <p>
+                Have an account?
+                <a href="#" className="ml-3 text-indigo-600 underline">
+                  Log in
+                </a>
+              </p>
             </div>
             <input
               className=" my-4 w-full  rounded-md border bg-gray-100 p-2"
@@ -65,12 +85,8 @@ export default function CheckoutPage() {
             placeholder="Phone number"
           />
           <label className=" text-sm font-medium text-gray-600">Country</label>
+          <CountrySelector onChange={handleCountryChange} />
 
-          <input
-            className=" my-4 w-full  rounded-md border bg-gray-100 p-2"
-            type="text"
-            placeholder="Select country"
-          />
           <label className=" text-sm font-medium text-gray-600">Address</label>
 
           <input
@@ -166,27 +182,37 @@ export default function CheckoutPage() {
       </div>
       <div className="w-1/2  p-4">
         {/* Summary section */}
-        <div className="w-[564px] border">
-          <div className="mb-4 flex items-center">
-            <img
-              src="item-image-1.jpg"
-              alt="Item 1"
-              className="mr-2 h-16 w-16"
-            />
-            <div>
-              <p>Item Name 1</p>
-              <p>Weight: 1 lb</p>
-              <p>Price: $10.00</p>
+        <div className="my-2 rounded-md border-2 px-10">
+          <div className="mb-4 flex flex-col  ">
+            <h2 className=" my-6 text-left text-xl">Summary</h2>
+            <div className="border-b-2">
+              {items.map((item) => (
+                <CheckOutElement
+                  key={item.id}
+                  itemName={item.name}
+                  weight={item.weight}
+                  price={item.price}
+                  id={item.id}
+                />
+              ))}
             </div>
-          </div>
-          {/* Repeat the above structure for each item */}
-          <div className="mb-4">
-            <p>Subtotal: $xx.xx</p>
-            <p>Shipping: $xx.xx</p>
-            <p>Tax: $x.xx</p>
-          </div>
-          <div>
-            <p>Total: $xxx.xx</p>
+            <div className="mt-4 flex justify-between ">
+              <p>Subtotal:</p>
+              <p className="">${subtotal.toFixed(2)}</p>
+            </div>
+            <div className="mt-4 flex justify-between ">
+              <p>Shipping:</p>
+              <p className="">${subtotal.toFixed(2)}</p>
+            </div>
+            <div className="mb-4 mt-4  flex justify-between border-b-2 ">
+              <p className=" mb-7 ">Tax:</p>
+              <p className="">${subtotal.toFixed(2)}</p>
+            </div>
+
+            <div className="mt-4 flex justify-between text-2xl">
+              <p className="  ">Total:</p>
+              <p className="">${subtotal.toFixed(2)}</p>
+            </div>
           </div>
         </div>
       </div>
