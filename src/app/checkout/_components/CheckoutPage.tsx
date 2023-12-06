@@ -1,9 +1,10 @@
 'use client'
 
 import React from 'react'
-import AddToCartButton from '@/components/ui/Button'
 import CheckOutElement from './CheckOutElement'
 import CountrySelector from './CountrySelector'
+import Button from '@/components/ui/Button'
+import Link from 'next/link'
 
 export default function CheckoutPage() {
   const items = [
@@ -18,8 +19,8 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="mx-24 mt-8 flex justify-center">
-      <div className="w-1/2 p-4">
+    <div className="mx-6 mt-8 justify-center lg:mx-24 lg:flex">
+      <div className="p-4 lg:w-1/2">
         {/* Checkout form */}
         <form>
           <div>
@@ -177,10 +178,12 @@ export default function CheckoutPage() {
             placeholder=" Name on the card"
           />
 
-          <AddToCartButton className="mb-20 w-full">Pay now</AddToCartButton>
+          <Button className="h-14 w-full text-lg font-medium">
+            <Link href={'/'}>Pay now</Link>
+          </Button>
         </form>
       </div>
-      <div className="w-1/2  p-4">
+      <div className="p-4  lg:w-1/2">
         {/* Summary section */}
         <div className="my-2 rounded-md border-2 px-10">
           <div className="mb-4 flex flex-col  ">
