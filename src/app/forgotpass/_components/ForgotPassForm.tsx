@@ -42,7 +42,7 @@ export default function ForgotPassForm() {
       {emailSent ? (
         <div>
           <h2 className="mb-4 pt-6 text-4xl font-medium text-slate-950">
-            Your email is on the way!
+            Email is on the way!
           </h2>
           <div>
             <p className="mb-10 text-lg font-medium text-slate-950">
@@ -74,7 +74,7 @@ export default function ForgotPassForm() {
                 placeholder="Enter your email address"
               />
             </div>
-            <Button>Send reset link</Button>
+            <Button className="px-6">Send reset link</Button>
           </form>
         </div>
       )}

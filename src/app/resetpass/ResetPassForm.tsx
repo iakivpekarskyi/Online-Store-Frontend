@@ -23,7 +23,7 @@ export default function ResetPassForm() {
       {resetSuccessful ? (
         <div>
           <h2 className="mb-4 pt-6 text-4xl font-medium text-slate-950">
-            Your password has been changed.
+            Password has been changed.
           </h2>
           <Button onClick={handleButtonClick}>Return to main page</Button>
         </div>
@@ -58,7 +58,7 @@ export default function ResetPassForm() {
               placeholder="Enter your new password"
             />
 
-            <Button>Send reset link</Button>
+            <Button>Reset password</Button>
           </form>
         </div>
       )}
