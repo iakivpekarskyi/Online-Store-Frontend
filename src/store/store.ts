@@ -1,18 +1,30 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { type CartSliceStore, createCartSlice } from './cartSlice'
+import { type FavSliceStore, createFavSlice } from './favSlice'
 
-export const useCombinedStore = create<CartSliceStore>()(
+export type CombinedStateStore = {
+  cart: CartSliceStore
+  fav: FavSliceStore
+}
+
+export const useCombinedStore = create<CombinedStateStore>()(
   persist(
     (...a) => ({
-      ...createCartSlice(...a),
+      cart: createCartSlice(...a),
+      fav: createFavSlice(...a),
     }),
     {
-      name: 'cart-storage',
+      name: 'combined-storage',
       partialize: (state) => ({
-        items: state.items,
-        count: state.count,
-        totalPrice: state.totalPrice,
+        cart: {
+          items: state.cart.items,
+          count: state.cart.count,
+          totalPrice: state.cart.totalPrice,
+        },
+        fav: {
+          items: state.fav.items,
+        },
       }),
     },
   ),
