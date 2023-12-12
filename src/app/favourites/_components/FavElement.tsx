@@ -1,18 +1,18 @@
+'use client'
+
 import React from 'react'
 import Button from '@/components/ui/Button'
 import Image from 'next/image'
 import productImg from '../../../../public/coffee.png'
 import heart from '../../../../public/heart_full.svg'
 
-import { FavItem } from '@/store/favSlice'
+import { IProduct } from '@/models/Products'
 
 interface FavElementProps {
-  product: FavItem
-  add: (id: string) => void
-  remove: (id: string) => void
+  product: IProduct
 }
 
-export default function FavElement({ product, remove }: FavElementProps) {
+export default function FavElement({ product }: FavElementProps) {
   return (
     <div className="flex items-center justify-between border-b p-4 pr-0">
       {/* Left side: Picture */}
@@ -29,17 +29,14 @@ export default function FavElement({ product, remove }: FavElementProps) {
       {/* Right side: Data */}
       <div className="relative ml-4 grow">
         <p className="text-lg font-semibold">{product.name}</p>
-        <p className={'font-medium text-placeholder'}>{` ${null} g.`}</p>
-        <p className="right-0 top-0 text-lg font-semibold sm:absolute">{`$${product.price.toFixed(
+        <p
+          className={'font-medium text-placeholder'}
+        >{` ${product.quantity} g.`}</p>
+        <p className="right-0 top-0 text-lg font-semibold sm:absolute">{`$${product?.price?.toFixed(
           2,
         )}`}</p>
         <div className="mt-[22px] flex justify-start">
-          <Button
-            className=" bg-white"
-            onClick={() => {
-              remove(product.id)
-            }}
-          >
+          <Button className=" bg-white">
             <Image
               src={heart}
               width={24}

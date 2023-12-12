@@ -11,8 +11,8 @@ export type CombinedStateStore = {
 export const useCombinedStore = create<CombinedStateStore>()(
   persist(
     (...a) => ({
-      cart: createCartSlice(...a),
-      fav: createFavSlice(...a),
+      ...createCartSlice(...a),
+      ...createFavSlice(...a),
     }),
     {
       name: 'combined-storage',

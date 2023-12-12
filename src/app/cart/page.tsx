@@ -6,7 +6,7 @@ import { useStoreData } from '@/hooks/useStoreData'
 import CartFull from './_components/CartFull'
 
 export default function Cart() {
-  const count = useStoreData(useCombinedStore, (state) => state.count)
+  const count = useStoreData(useCombinedStore, (state) => state)
 
   return <>{count ? <CartFull /> : <CartEmpty />}</>
 }
