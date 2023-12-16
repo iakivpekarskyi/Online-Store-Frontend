@@ -2,11 +2,13 @@
 
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import Button from '@/components/ui/Button'
 import { useRouter } from 'next/navigation'
 
+import Button from '@/components/ui/Button'
+import FormInput from '@/components/ui/FormInput'
+
 export default function ResetPassForm() {
-  const { handleSubmit } = useForm()
+  const { handleSubmit, register } = useForm()
   const [resetSuccessful, setResetSuccessful] = useState(false)
 
   const router = useRouter()
@@ -15,6 +17,7 @@ export default function ResetPassForm() {
   }
 
   const onSubmit = () => {
+    console.log('reset submitted')
     setResetSuccessful(true)
   }
 
@@ -38,27 +41,29 @@ export default function ResetPassForm() {
               one letter, one digit.
             </p>
 
-            <label className=" text-sm font-medium text-gray-600">
-              New password
-            </label>
-            <input
-              className=" my-4 w-full  rounded-md border bg-gray-100 p-2"
-              type="password"
+            <FormInput
               id="password"
+              register={register}
+              name="email"
+              label="New password"
+              type="password"
               placeholder="Enter your new password"
+              className="mb-5"
             />
 
-            <label className=" text-sm font-medium text-gray-600">
-              Confirm new password
-            </label>
-            <input
-              className=" my-4 w-full  rounded-md border bg-gray-100 p-2"
-              type="password"
+            <FormInput
               id="password"
+              register={register}
+              name="email"
+              label="Confirm new password"
+              type="password"
               placeholder="Enter your new password"
+              className="mb-5"
             />
 
-            <Button>Reset password</Button>
+            <Button type="submit" className="px-6">
+              Reset password
+            </Button>
           </form>
         </div>
       )}

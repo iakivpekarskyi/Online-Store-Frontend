@@ -2,27 +2,14 @@
 
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import Button from '@/components/ui/Button'
-
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-// const useResetPasswordStore = create((set) => ({
-//   email: '',
-//   emailSent: false,
-//   resetSuccessful: false,
-//   setEmail: (email) => set({ email }),
-//   setEmailSent: (emailSent) => set({ emailSent }),
-//   setResetSuccessful: (resetSuccessful) => set({ resetSuccessful }),
-// }))
-
-// interface ForgotPassFromProps {
-//   email: string
-// }
+import Button from '@/components/ui/Button'
+import FormInput from '@/components/ui/FormInput'
 
 export default function ForgotPassForm() {
-  const { handleSubmit } = useForm()
-  const [email, setEmail] = useState('')
+  const { handleSubmit, register } = useForm()
   const [emailSent, setEmailSent] = useState(false)
 
   const router = useRouter()
@@ -30,10 +17,9 @@ export default function ForgotPassForm() {
   const handleButtonClick = () => {
     router.push('/')
   }
-  // const { email, emailSent, setEmail, setEmailSent } = useResetPasswordStore()
 
   const onSubmit = () => {
-    setEmail({ email })
+    console.log(' forgot submitted')
     setEmailSent(true)
   }
 
@@ -63,18 +49,20 @@ export default function ForgotPassForm() {
               All good. Enter your account`s email address and we`ll send you a
               link to reset your password.
             </p>
-            <div>
-              <label className=" text-sm font-medium text-gray-600">
-                Enter your email
-              </label>
-              <input
-                className=" my-4 w-full  rounded-md border bg-gray-100 p-2"
-                type="email"
-                id="email"
-                placeholder="Enter your email address"
-              />
-            </div>
-            <Button className="px-6">Send reset link</Button>
+
+            <FormInput
+              id="email"
+              register={register}
+              name="email"
+              label="Enter your email"
+              type="email"
+              placeholder="Enter your email address"
+              className="mb-5"
+            />
+
+            <Button type="submit" className="px-6">
+              Send reset link
+            </Button>
           </form>
         </div>
       )}
