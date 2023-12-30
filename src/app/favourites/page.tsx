@@ -13,15 +13,20 @@ export default function Fav() {
 
 
   useEffect(() => {
-    if (token) {
-      syncBackendFav(token).catch((e) => console.log(e))
-
-    } else {
-      getFavouriteProducts()
+    const fetchData = async (): Promise<void> => {
+      try {
+        if (token) {
+          await syncBackendFav(token)
+        } else {
+          await getFavouriteProducts()
+        }
+      } catch (error) {
+        console.error('Error in Fav useEffect:', error)
+      }
     }
 
-  }, [])
-
+    void fetchData()
+  }, [getFavouriteProducts, syncBackendFav, token])
 
 
   return <>

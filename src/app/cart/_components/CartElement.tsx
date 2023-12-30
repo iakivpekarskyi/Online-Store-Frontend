@@ -18,11 +18,6 @@ interface CartElementProps {
   removeAll: () => void
 }
 
-
-
-
-
-
 export default function CartElement({
   product,
   add,
