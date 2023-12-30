@@ -18,6 +18,11 @@ interface CartElementProps {
   removeAll: () => void
 }
 
+
+
+
+
+
 export default function CartElement({
   product,
   add,
@@ -87,6 +92,9 @@ export default function CartElement({
           >
             <Image src={trash} width={24} height={24} alt="Logo" priority />
           </Button>
+          <div>
+            <ButtonHeart active={isActive} onClick={handleButtonClick} className="ml-2" />
+          </div>
           <div>
             <ButtonHeart active={isActive} onClick={handleButtonClick} className="ml-2" />
           </div>
