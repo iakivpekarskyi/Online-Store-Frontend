@@ -1,3 +1,4 @@
+
 'use client'
 
 import { useEffect } from 'react'
@@ -8,7 +9,6 @@ import { useAuthStore } from '@/store/authStore'
 
 export default function Fav() {
   const { getFavouriteProducts, favouriteIds, syncBackendFav } = useFavouritesStore()
-
   const { token } = useAuthStore()
 
 
@@ -35,3 +35,4 @@ export default function Fav() {
 
 
 }
+
