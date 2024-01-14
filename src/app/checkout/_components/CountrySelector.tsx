@@ -1,50 +1,27 @@
-import React, { useMemo, useState } from 'react'
-import Select, { ValueType } from 'react-select'
+// import React, { useMemo } from 'react'
+// import { ValueType } from 'react-select'
+// import countryList from 'react-select-country-list'
 
-import countryList from 'react-select-country-list'
+// interface Props {
+//   onChange: (country: CountryData) => void
+// }
 
-interface CountrySelectorProps {
-  onChange: (country: CountryData | null) => void
-}
+// interface CountryData {
+//   label: string
+//   value: string
+// }
 
-interface CountryData {
-  label: string
-  value: string
-}
+// const CountrySelector = ({ onChange }: Props) => {
+//   const options = useMemo(() => countryList().getData(), [])
 
-const styleB = {
-  'appearance': 'none',
-  'webkitAppearance': 'none',
-  'width': '100%',
-  'fontSize': '1.15rem',
-  'padding': '0.675em 6em 0.675em 1em',
-  '-webkit-appearance': 'none',
-  '-webkit-border-radius': '0.25rem',
-  '-webkit-padding-start': '6em',
-  'background': '#ec0000',
-  'border': '1px solid #0484e5',
-  'borderRadius': '0.25rem',
-  'color': '#000000',
-  'cursor': 'pointer',
-}
+//   return (
+//     <Select
+//       options={options}
+//       onChange={(setValue) => onChange(setValue)}
+//       placeholder="Select country"
+//       className="select-country"
+//     />
+//   )
+// }
 
-export default function CountrySelector({ onChange }: CountrySelectorProps) {
-  const [value, setValue] = useState<ValueType<CountryData>>(null)
-  const options = useMemo(() => countryList().getData(), [])
-
-  const changeHandler = (selectedOption: ValueType<CountryData>) => {
-    setValue(selectedOption as CountryData)
-    onChange(selectedOption as CountryData)
-  }
-
-  return (
-    <Select
-      className="country"
-      options={options}
-      value={value}
-      onChange={changeHandler}
-      placeholder={'Select country'}
-      styles={styleB}
-    />
-  )
-}
+// export default CountrySelector

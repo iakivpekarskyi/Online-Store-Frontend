@@ -2,7 +2,7 @@
 
 import React from 'react'
 import CheckOutElement from './CheckOutElement'
-import CountrySelector from './CountrySelector'
+// import CountrySelector from './CountrySelector'
 import Button from '@/components/ui/Button'
 import Link from 'next/link'
 
@@ -14,9 +14,9 @@ export default function CheckoutPage() {
   ]
   const subtotal = items.reduce((acc, item) => acc + item.price, 0)
 
-  const handleCountryChange = (selectedCountry) => {
-    console.log('Selected Country:', selectedCountry)
-  }
+  // const handleCountryChange = (selectedCountry) => {
+  //   console.log('Selected Country:', selectedCountry)
+  // }
 
   return (
     <div className="mx-6 mt-8 justify-center lg:mx-24 lg:flex">
@@ -86,7 +86,7 @@ export default function CheckoutPage() {
             placeholder="Phone number"
           />
           <label className=" text-sm font-medium text-gray-600">Country</label>
-          <CountrySelector onChange={handleCountryChange} />
+          {/* <CountrySelector onChange={handleCountryChange} /> */}
 
           <label className=" text-sm font-medium text-gray-600">Address</label>
 
