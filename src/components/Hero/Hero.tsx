@@ -3,7 +3,7 @@ import hero from '../../../public/hero.png'
 
 export default function Hero() {
   return (
-    <section className={'flex justify-center'}>
+    <section className={'flex justify-center mx-6'}>
       <div className={'z-[-1] min-h-[200px] overflow-hidden'}>
         <Image
           src={hero}

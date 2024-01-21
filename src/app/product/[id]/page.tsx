@@ -28,7 +28,7 @@ export default async function Page({ params }: Readonly<ProductProps>) {
   return (
     <section
       className={
-        'flex flex-col gap-[21px] md:flex-row md:justify-center md:gap-12'
+        'flex flex-col gap-[21px] mx-4 md:flex-row md:justify-center'
       }
     >
       <Image
@@ -38,9 +38,9 @@ export default async function Page({ params }: Readonly<ProductProps>) {
         alt="product_image"
         className={'m-auto md:m-0'}
       ></Image>
-      <div className={'flex flex-col gap-6 px-4 pb-4 md:max-w-[532px]'}>
+      <div className={'flex flex-col gap-6 pb-4 '}>
         <div
-          className={'flex flex-col gap-[18px] sm:items-center md:items-start'}
+          className={'flex flex-col gap-[18px] sm:items-start'}
         >
           <h2 className={'text-4XL'}>{product.name}</h2>
           <div className={'flex items-center gap-2 text-L'}>
@@ -55,8 +55,9 @@ export default async function Page({ params }: Readonly<ProductProps>) {
           <AddToCartButton product={product} />
           <HeartWrapper id={product.id} className="ml-2" />
         </div>
-        <p className={'text-XL font-medium md:mt-4'}>{product.description}</p>
+        <p className={'text-XL font-medium sm:mt-4'}>{product.description}</p>
       </div>
+
     </section>
   )
 }

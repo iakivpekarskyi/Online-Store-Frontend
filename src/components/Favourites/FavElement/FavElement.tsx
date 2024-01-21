@@ -61,8 +61,8 @@ export default function FavElement({ product }: Readonly<FavElementProps>) {
 
           <span>{productRating}</span>
         </div>
-        <div className="flex">
-          <Button onClick={addToCart} className={'mr-2'}>Add to cart</Button>
+        <div className="flex items-center ">
+          <Button onClick={addToCart} className={'w-[145px]'}>Add to cart</Button>
           <ButtonHeart active={isActive} onClick={handleButtonClick} className="ml-2" />
         </div>
       </div>

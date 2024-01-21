@@ -85,9 +85,6 @@ export default function CartElement({
           <div>
             <ButtonHeart active={isActive} onClick={handleButtonClick} className="ml-2" />
           </div>
-          <div>
-            <ButtonHeart active={isActive} onClick={handleButtonClick} className="ml-2" />
-          </div>
         </div>
       </div>
     </div>

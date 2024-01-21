@@ -26,7 +26,7 @@ export default function ProductList() {
   }
 
   return (
-    <section className={'mb-5 mt-6 text-center min-[1124px]:mt-16'}>
+    <section className={'mb-5 mx-6 mt-6 text-center min-[1124px]:mt-16'}>
       <div className={'inline-flex flex-col items-center text-left'}>
         <h1
           className={
