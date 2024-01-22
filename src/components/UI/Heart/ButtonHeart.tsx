@@ -11,7 +11,7 @@ export default function ButtonHeart({ active, onClick, className }: Readonly<But
     <button
       onClick={onClick}
       className={twMerge(
-        'duration-400 flex h-[54px] w-[54px] cursor-pointer items-center justify-center rounded-full bg-secondary transition ease-in-out hover:scale-110  hover:bg-hover-heart m-3',
+        'duration-400 flex md:h-[54px] md:w-[54px] h-[36px] w-[36px] cursor-pointer items-center justify-center rounded-full bg-secondary transition ease-in-out hover:scale-110  hover:bg-hover-heart m-3',
         className,
       )}
     >
