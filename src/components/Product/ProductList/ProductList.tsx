@@ -64,18 +64,13 @@ export default function ProductList() {
           >
             Show more
           </button>
-
-
         )}
-        <button className={
-          'mt-[24px] h-[54px] w-[54px] rounded-[46px] bg-secondary'
-        }> UP</button>
+
         {isFetchingNextPage && (
           <div className={'mt-[24px] flex h-[54px] items-center'}>
             <Loader />
           </div>
         )}
-
         <ScrollUpBtn />
       </div>
     </section>

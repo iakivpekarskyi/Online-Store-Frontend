@@ -1,3 +1,5 @@
+import Image from 'next/image'
+import arrowup from '../../../../../public/arrowup.svg'
 import { useEffect, useState } from 'react'
 
 export default function ScrollUpBtn() {
@@ -23,7 +25,7 @@ export default function ScrollUpBtn() {
 
   return (
     <>
-      {showButton && (<button className="fixed bottom-4 right-4 bg-blue-500 p-2 rounded-full" onClick={scrollToTop}>UP</button>)}
+      {showButton && (<button className="fixed bottom-2 right-2 bg-secondary p-1 rounded-full w-12 h-12 hover:scale-105 transition ease-in-out" onClick={scrollToTop}><Image src={arrowup} alt="up_arrow" className={'inline-block'} /></button>)}
     </>
   )
 }
