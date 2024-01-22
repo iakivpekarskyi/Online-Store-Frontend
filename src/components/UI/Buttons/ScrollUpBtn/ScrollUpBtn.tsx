@@ -25,7 +25,7 @@ export default function ScrollUpBtn() {
 
   return (
     <>
-      {showButton && (<button className="fixed bottom-2 right-2 bg-secondary p-1 rounded-full w-12 h-12 hover:scale-105 transition ease-in-out" onClick={scrollToTop}><Image src={arrowup} alt="up_arrow" className={'inline-block'} /></button>)}
+      {showButton && (<button className=" m-3 fixed bottom-2 right-2 bg-secondary p-1 rounded-full w-12 h-12 hover:scale-110 transition ease-in-out border-2" onClick={scrollToTop}><Image src={arrowup} alt="up_arrow" className={'inline-block'} /></button>)}
     </>
   )
 }
