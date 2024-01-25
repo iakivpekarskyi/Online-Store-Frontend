@@ -42,6 +42,7 @@ interface CartSliceActions {
     token: string,
     updatedItem: ICartUpdatedItem,
   ) => Promise<void>
+  isItemInCart: (id: string) => boolean
 }
 
 export type CartSliceStore = CartSliceState & CartSliceActions
@@ -217,7 +218,6 @@ export const createCartSlice: StateCreator<
       isSync: false,
     } as CartSliceState)
   },
-
   createCart: async (
     token: string,
     reqItems: ICartPushItems,
@@ -261,6 +261,11 @@ export const createCartSlice: StateCreator<
       throw new Error((e as Error).message)
     }
   },
+  isItemInCart: (id: string) => {
+    const { itemsIds } = get()
+
+    return itemsIds.some((item) => item.productId === id)
+  },
 })
 
 function addToCart(id: string, cartList: ICartPushItem[]): ICartPushItem[] {
@@ -276,7 +281,6 @@ function addToCart(id: string, cartList: ICartPushItem[]): ICartPushItem[] {
     })
   }
 }
-
 function removeItem(id: string, cartList: ICartPushItem[]): ICartPushItem[] {
   return cartList
     .map((item) => {
@@ -287,21 +291,18 @@ function removeItem(id: string, cartList: ICartPushItem[]): ICartPushItem[] {
     })
     .filter((item) => item.productQuantity)
 }
-
 function removeFullProduct(
   id: string,
   cartList: ICartPushItem[],
 ): ICartPushItem[] {
   return cartList.filter((item) => item.productId !== id)
 }
-
 function getProductsCount(cartList: ICartPushItem[]): number {
   if (cartList.length)
     return cartList.reduce((prev, curr) => prev + curr.productQuantity, 0)
 
   return 0
 }
-
 function getTotalPrice(cartList: ICartItem[]): number {
   if (cartList.length)
     return cartList.reduce(
@@ -312,16 +313,13 @@ function getTotalPrice(cartList: ICartItem[]): number {
 
   return 0
 }
-
 //utility
-
 function getProductCartSlotId(
   id: string,
   cartList: ICartItem[],
 ): string | undefined {
   return cartList.find((item) => item.productInfo.id === id)?.id
 }
-
 function createItemsIdsFromCart(cartItems: ICartItem[]): ICartPushItem[] {
   return cartItems.map(
     (item) =>

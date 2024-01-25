@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import star from '../../../../public/star.png'
 import productImg from '../../../../public/coffee.png'
-import CircleAddBtn from '../../UI/Buttons/CircleAddBtn/CircleAddBtn'
+import AddToCartBtn from '../../UI/Buttons/AddToCartBtn/AddToCartBtn'
 import createImgUrl from '@/utils/createImgUrl'
 import ButtonHeart from '@/components/UI/Heart/ButtonHeart'
 import { productRating, productSize } from '@/constants/product'
@@ -13,7 +13,20 @@ import { CardProps } from '@/types/ProductCard'
 
 export default function ProductCard({ id, name, price, productFileUrl }: Readonly<CardProps>) {
 
-  const addToCart = useCombinedStore((state) => state.add)
+  const { add, remove, isItemInCart } = useCombinedStore(state => ({
+    add: state.add,
+    remove: state.remove,
+    isItemInCart: state.isItemInCart(id)
+  }))
+
+  const handleAddToCart = () => {
+    if (isItemInCart) {
+      remove(id, token)
+    } else {
+      add(id, token)
+    }
+  }
+
   const token = useAuthStore((state) => state.token)
   const { addFavourite, removeFavourite, favouriteIds } = useFavouritesStore()
   const isActive = favouriteIds.includes(id)
@@ -61,9 +74,9 @@ export default function ProductCard({ id, name, price, productFileUrl }: Readonl
       </div>
       <div className={'flex items-end justify-between'}>
         <p className={'text-XL font-medium md:text-2XL'}>${price}</p>
-        <CircleAddBtn
+        <AddToCartBtn
           onClick={() => {
-            addToCart(id, token)
+            handleAddToCart(id, token)
           }}
         />
       </div>
