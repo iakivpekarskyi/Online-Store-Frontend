@@ -75,9 +75,8 @@ export default function ProductCard({ id, name, price, productFileUrl }: Readonl
       <div className={'flex items-end justify-between'}>
         <p className={'text-XL font-medium md:text-2XL'}>${price}</p>
         <AddToCartBtn
-          onClick={() => {
-            handleAddToCart(id, token)
-          }}
+          productId={id}
+          onClick={handleAddToCart}
         />
       </div>
     </div>
