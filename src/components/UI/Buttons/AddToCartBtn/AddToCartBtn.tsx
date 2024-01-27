@@ -34,7 +34,7 @@ export default function AddToCartBtn({ productId }: Props) {
     <button
       className="relative h-12 w-12 cursor-pointer rounded-full bg-black hover:bg-fullpage-tint focus:bg-inverted active:bg-fullpage-tint hover:scale-110 transition ease-in-out m-2"
       onClick={handleAddToCart}
-      style={{ left: 'px' }}
+
     >
       <div className="absolute inset-0 flex items-center justify-center">
         <Image src={isItemInCart ? cart_full : cart_empty} alt={isItemInCart ? 'remove from cart' : 'add to cart'} className="relative" style={{ right: '2px' }} />

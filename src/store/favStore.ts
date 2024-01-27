@@ -4,6 +4,7 @@ import { IProduct } from '@/types/Products'
 import { mergeFavs, removeFavItem } from '@/services/apiFavService'
 import { getProductByIds } from '@/services/apiService'
 import { IFavPushItems } from '@/types/Fav'
+// import { useAuthStore } from './authStore'
 
 export interface FavSliceState {
   favouriteIds: string[]
@@ -94,7 +95,7 @@ export const useFavouritesStore = create<FavStoreState>()(
 
           set((state) => ({
             ...state,
-            // favouriteIds: [],
+            favouriteIds: [...favouriteIds],
             favourites: products,
           }))
         } catch (e) {

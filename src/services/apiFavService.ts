@@ -9,10 +9,12 @@ export async function mergeFavs(
   requestItems: IFavPushItems,
 ): Promise<FavResponse> {
   try {
+    console.log('token', token)
+    console.log('requestItems', requestItems)
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_HOST_REMOTE}/favorites`,
       {
-        method: 'POST',
+        method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',

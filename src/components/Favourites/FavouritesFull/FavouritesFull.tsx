@@ -6,13 +6,20 @@ import Loader from '@/components/UI/Loader/Loader'
 import { IProduct } from '@/types/Products'
 import { useFavouritesStore } from '@/store/favStore'
 
+
 export default function FavouritesFull() {
   const { favourites, loading } = useFavouritesStore()
 
+
+  console.log('favourites', favourites)
   const renderContent = () => {
     if (loading) {
       return <Loader />
     } else {
+      if (!favourites) {
+        return <Loader />
+      }
+
       return favourites.map((item: IProduct) => (
         <FavElement key={item.id} product={item} />
       ))
