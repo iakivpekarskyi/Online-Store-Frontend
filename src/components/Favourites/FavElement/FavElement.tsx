@@ -12,8 +12,12 @@ import { useCombinedStore } from '@/store/store'
 import { useFavouritesStore } from '@/store/favStore'
 import { FavElementProps } from '@/types/FavElement'
 
+
+
 export default function FavElement({ product }: Readonly<FavElementProps>) {
   const { addFavourite, removeFavourite, favouriteIds } = useFavouritesStore()
+
+
   const isActive = favouriteIds.includes(product.id)
   const { add } = useCombinedStore()
   const { token } = useAuthStore()
@@ -23,15 +27,17 @@ export default function FavElement({ product }: Readonly<FavElementProps>) {
 
   const handleButtonClick = async () => {
     try {
-      if (isActive) {
-        await removeFavourite(product.id, token)
-      } else {
+      if (!isActive) {
         await addFavourite(product.id, token)
+      } else {
+        await removeFavourite(product.id, token)
       }
     } catch (error) {
       console.error('Error in handleButtonClick:', error)
     }
   }
+
+
 
   return (
     <div className="flex items-center justify-between border-b p-4 pr-0">

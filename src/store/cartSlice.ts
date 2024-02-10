@@ -168,6 +168,7 @@ export const createCartSlice: StateCreator<
       )
     }
   },
+
   removeFullProduct: (id: string, token: string | null) => {
     if (token) {
       const { tempItems } = get()
@@ -291,6 +292,7 @@ function removeItem(id: string, cartList: ICartPushItem[]): ICartPushItem[] {
     })
     .filter((item) => item.productQuantity)
 }
+
 function removeFullProduct(
   id: string,
   cartList: ICartPushItem[],

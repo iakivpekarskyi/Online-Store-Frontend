@@ -4,28 +4,36 @@ import { ServerError } from './authService'
 import { FavResponse, IFavPushItems } from '@/types/Fav'
 import { IProduct } from '@/types/Products'
 
-export async function mergeFavs(
+export async function addFavs(
   token: string,
-  requestItems: IFavPushItems,
+  favIds: IFavPushItems,
 ): Promise<FavResponse> {
   try {
-    console.log('token', token)
-    console.log('requestItems', requestItems)
+    console.log('Sending request to addFavs with data:', favIds)
+
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_HOST_REMOTE}/favorites`,
       {
-        method: 'GET',
+        method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(requestItems),
+        body: JSON.stringify(favIds),
       },
     )
 
+    console.log('Received response from addFavs:', response)
+
+    if (!response.ok) {
+      throw new Error('Failed to add favorites to the server')
+    }
+
     return handleResponse<FavResponse, ErrorResponse>(response)
   } catch (error) {
-    throw new ServerError('Something went wrong')
+    console.error('Error in addFavs:', error)
+
+    throw new ServerError('Something went wrong while adding favs')
   }
 }
 
@@ -47,11 +55,11 @@ export async function removeFavItem(
 
     return handleResponse<FavResponse, ErrorResponse>(response)
   } catch (error) {
-    throw new ServerError('Something went wrong')
+    throw new ServerError('Something went wrong while deleting fav')
   }
 }
 
-export async function getFavByIds(token: string): Promise<IProduct[]> {
+export async function getFavs(token: string | null): Promise<IProduct[]> {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_HOST_REMOTE}/favorites`,

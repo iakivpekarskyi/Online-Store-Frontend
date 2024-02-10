@@ -1,5 +1,6 @@
 'use client'
 import { useAuthStore } from '@/store/authStore'
+import { useFavouritesStore } from '@/store/favStore'
 import { useCombinedStore } from '@/store/store'
 import { useEffect } from 'react'
 import { useShallow } from 'zustand/react/shallow'
@@ -12,22 +13,49 @@ export default function CartInit() {
   const reset = useCombinedStore((state) => state.resetCart)
   const { token } = useAuthStore()
 
+  const { favouriteIds, getFavouriteProducts, syncBackendFav, isFavSync, setLoading } = useFavouritesStore()
+
   useEffect(() => {
-    if (!token) {
-      if (isSync) {
-        reset()
+    const updateFavorites = async () => {
+      try {
+        setLoading(true)
+
+        if (token) {
+          if (!isFavSync) {
+            await syncBackendFav(token, { productIds: favouriteIds })
+          }
+        } else {
+          await getFavouriteProducts()
+        }
+
+        setLoading(false)
+      } catch (error) {
+        console.error('Error during initialization:', error)
+        setLoading(false)
       }
-      if (itemsIds.length) {
-        getCartItems().catch((e) => console.log(e))
-      }
-    } else if (!isSync) {
-      syncBackendCart(token).catch((e) => console.log(e))
     }
-  })
 
-  // [itemsIds, token, isSync]) - eSlint was complaying about this line. 
-  // 27:6  Warning: React Hook useEffect has missing dependencies: 'getCartItems', 'reset', and 'syncBackendCart'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+    const initializeCartAndFavorites = async () => {
+      try {
+        if (!token) {
+          if (isSync) {
+            reset()
+          }
+          if (itemsIds.length) {
+            await getCartItems()
+          }
+        } else if (!isSync) {
+          await syncBackendCart(token)
+        }
 
+        await updateFavorites()
+      } catch (error) {
+        console.error('Error during cart and favorites initialization:', error)
+      }
+    }
 
-  return <></>
+    void initializeCartAndFavorites()
+  }, [token, itemsIds, isSync, getCartItems, syncBackendCart, reset, syncBackendFav, isFavSync, favouriteIds, getFavouriteProducts, setLoading])
+
+  return null
 }
