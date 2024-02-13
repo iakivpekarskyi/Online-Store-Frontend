@@ -1,33 +1,25 @@
-import { IProduct } from '@/models/Products'
+import { AxiosResponse } from 'axios'
+import { IProduct, IProductsList } from '@/types/Products'
+import { api } from './apiConfig/apiConfig'
 
 export async function getAllProducts(url: string) {
-  try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_HOST_REMOTE}/${url}`)
+  const response: AxiosResponse<IProductsList> = await api.get(url)
 
-    if (res.status !== 200) {
-      throw new Error(res.statusText)
-    }
-
-    return res.json()
-  } catch (error) {
-    if (error instanceof Error) throw new Error(error.message)
-    else throw new Error('Something went wrong')
-  }
+  return response.data
 }
 
-export async function getProduct(id: string): Promise<IProduct> {
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_HOST_REMOTE}/products/${id}`,
-    )
+export async function getProduct(id: string) {
+  const response: AxiosResponse<IProduct> = await api.get(`/products/${id}`)
 
-    if (res.status !== 200) {
-      throw new Error(res.statusText)
-    }
+  return response.data
+}
 
-    return res.json() as Promise<IProduct>
-  } catch (error) {
-    if (error instanceof Error) throw new Error(error.message)
-    else throw new Error('Something went wrong')
-  }
+export async function getProductByIds(ids: string[]) {
+  const body = { productIds: ids }
+  const response: AxiosResponse<IProduct[]> = await api.post(
+    '/products/ids',
+    body,
+  )
+
+  return response.data
 }
