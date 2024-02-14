@@ -3,9 +3,11 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
+import Button from '@/components/UI/Buttons/Button/Button'
+import FormInput from '@/components/UI/FormInput/FormInput'
 
-import Button from '@/components/ui/Button'
-import FormInput from '@/components/ui/FormInput'
+
+
 
 export default function ResetPassForm() {
   const { handleSubmit, register } = useForm()

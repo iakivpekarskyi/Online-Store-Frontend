@@ -59,7 +59,7 @@ function AuthModal({ onCloseModal }: Readonly<LoginModalProps>) {
             </Link>
           )}
           {switchForm === SwitchType.Login && (
-            <Link href="/" className="flex items-center justify-center text-focus mt-[40px]">
+            <Link href="/forgotpass" className="flex items-center justify-center text-focus mt-[40px]">
               Forgot password
             </Link>
           )}

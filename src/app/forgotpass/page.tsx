@@ -1,4 +1,4 @@
-import ForgotPassForm from '@/app/forgotpass/_components/ForgotPassForm'
+import ForgotPassForm from '@/components/Auth/ResetPassword/ForgotPassForm'
 export default function ForgotPass() {
   return (
     <>

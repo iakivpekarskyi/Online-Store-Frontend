@@ -6,6 +6,7 @@ import LoginForm from '@/components/Auth/Forms/LoginForm/LoginForm'
 import RegistrationForm from '@/components/Auth/Forms/RegistrationForm/RegistrationForm'
 import Link from 'next/link'
 import Button from '@/components/UI/Buttons/Button/Button'
+import { useAuthStore } from '@/store/authStore'
 
 
 enum SwitchType {
@@ -17,6 +18,13 @@ function AuthModalRegistr({ onCloseModal }: Readonly<AuthModalProps>) {
   const [switchForm, setSwitchForm] = useState<SwitchType>(
     SwitchType.Registration,
   )
+
+  const resetOpenModal = useAuthStore((state) => state.resetOpenModal)
+
+  const handleForgotPasswordClick = () => {
+    resetOpenModal()
+  }
+
   const pathname = usePathname()
 
   if (pathname === '/') return null
@@ -28,6 +36,7 @@ function AuthModalRegistr({ onCloseModal }: Readonly<AuthModalProps>) {
         : SwitchType.Login,
     )
   }
+
 
   return (
     <div className={'fixed bottom-0 right-0 top-14 z-30 flex w-full sm:top-22'}>
@@ -48,7 +57,9 @@ function AuthModalRegistr({ onCloseModal }: Readonly<AuthModalProps>) {
             </Link>
           )}
           {switchForm === SwitchType.Login && (
-            <Link href="/" className="flex items-center justify-center text-focus mt-[40px]">
+            <Link href="/forgotpass" className="flex items-center justify-center text-focus mt-[40px]"
+              onClick={handleForgotPasswordClick}
+            >
               Forgot password
             </Link>
           )}

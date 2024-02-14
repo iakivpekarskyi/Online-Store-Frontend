@@ -4,9 +4,9 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Button from '@/components/UI/Buttons/Button/Button'
+import FormInput from '@/components/UI/FormInput/FormInput'
 
-import Button from '@/components/ui/Button'
-import FormInput from '@/components/ui/FormInput'
 
 export default function ForgotPassForm() {
   const { handleSubmit, register } = useForm()
@@ -19,7 +19,6 @@ export default function ForgotPassForm() {
   }
 
   const onSubmit = () => {
-    console.log(' forgot submitted')
     setEmailSent(true)
   }
 
@@ -69,3 +68,4 @@ export default function ForgotPassForm() {
     </div>
   )
 }
+
