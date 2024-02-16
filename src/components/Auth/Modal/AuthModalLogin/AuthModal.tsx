@@ -38,8 +38,12 @@ function AuthModal({ onCloseModal }: Readonly<LoginModalProps>) {
     )
   }
 
+  const handleForgotPasswordClick = () => {
+    onCloseModal?.()
+  }
+
   return (
-    <div className={'fixed bottom-0 right-0 top-14 z-30 flex w-full sm:top-22'}>
+    <div className={'sm:top-22 fixed bottom-0 right-0 top-14 z-30 flex w-full'}>
       <Link
         href="/"
         className={'grow-0 bg-gray-500 bg-opacity-75 min-[440px]:grow'}
@@ -53,13 +57,21 @@ function AuthModal({ onCloseModal }: Readonly<LoginModalProps>) {
           {switchForm === SwitchType.Login ? (
             <LoginForm />
           ) : (
-            <Link href="/auth/login" onClick={handleClickSwitchFrom}
-              className="mt-[10px] w-full hover:text-focus flex text-[gray]">
-              Already have account? <span className='text-primary ml-[5px] underline' >Sign In</span>
+            <Link
+              href="/auth/login"
+              onClick={handleClickSwitchFrom}
+              className="mt-[10px] flex w-full text-[gray] hover:text-focus"
+            >
+              Already have account?{' '}
+              <span className="ml-[5px] text-primary underline">Sign In</span>
             </Link>
           )}
           {switchForm === SwitchType.Login && (
-            <Link href="/forgotpass" className="flex items-center justify-center text-focus mt-[40px]">
+            <Link
+              onClick={handleForgotPasswordClick}
+              href="/forgotpass"
+              className="mt-[40px] flex items-center justify-center text-focus"
+            >
               Forgot password
             </Link>
           )}
@@ -95,4 +107,5 @@ function AuthModal({ onCloseModal }: Readonly<LoginModalProps>) {
     </div>
   )
 }
+
 export default AuthModal

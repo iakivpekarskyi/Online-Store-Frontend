@@ -6,10 +6,11 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Button from '@/components/UI/Buttons/Button/Button'
 import FormInput from '@/components/UI/FormInput/FormInput'
+import axios from 'axios'
 
 
 export default function ForgotPassForm() {
-  const { handleSubmit, register } = useForm()
+  const { handleSubmit, register, getValues } = useForm()
   const [emailSent, setEmailSent] = useState(false)
 
   const router = useRouter()
@@ -18,8 +19,22 @@ export default function ForgotPassForm() {
     router.push('/')
   }
 
-  const onSubmit = () => {
-    setEmailSent(true)
+  const onSubmit = async () => {
+
+    const { email } = getValues()
+
+    try {
+      // Make an Axios POST request to your server endpoint for sending confirmation emails
+      await axios.post('YOUR_SERVER_API_ENDPOINT', { email })
+
+      // If the request is successful, set emailSent to true
+      setEmailSent(true)
+    } catch (error) {
+      // Handle errors, e.g., log the error or show an error message
+      console.error('Error sending confirmation email:', error)
+    }
+
+
   }
 
   return (
@@ -68,4 +83,5 @@ export default function ForgotPassForm() {
     </div>
   )
 }
+
 
